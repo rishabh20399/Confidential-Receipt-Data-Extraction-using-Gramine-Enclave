@@ -3,8 +3,7 @@
 This project runs confidential receipt data extraction using [Donut (CORD)](https://github.com/clovaai/donut) inside a Gramine enclave-like Docker container (no raw data exposure). It parses receipt images into structured JSON using OCR + NER.
 
 Useful link for reference:
-[https://gramine.readthedocs.io/en/latest/tutorials/pytorch/index.html
-]([url](https://gramine.readthedocs.io/en/latest/tutorials/pytorch/index.html))
+([url](https://gramine.readthedocs.io/en/latest/tutorials/pytorch/index.html))
 ## 📦 Run
 
 ```bash
