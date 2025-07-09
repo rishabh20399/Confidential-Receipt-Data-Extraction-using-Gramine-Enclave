@@ -1,0 +1,112 @@
+
+[libos]
+entrypoint = "/usr/bin/python3"
+
+[loader]
+entrypoint = { uri = "file:{{ gramine.libos }}" }
+argv = [ "/usr/bin/python3", "/app/donut_infer.py" ]
+env.LD_LIBRARY_PATH = "/usr/lib:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/lib64:/usr/lib64"
+env.PYTHONPATH = "/app"
+env.PATH = "/usr/bin"
+env.LANG = "C.UTF-8"
+env.LC_ALL = "C.UTF-8"
+env.TMPDIR = "/tmp_gramine"
+log_level = "debug"
+
+[fs]
+mounts = [
+  { path = "/app", uri = "file:/app", type = "chroot" },
+  { path = "/usr/bin/python3", uri = "file:/usr/bin/python3" },
+  { path = "/usr/lib", uri = "file:/usr/lib", type = "chroot" },
+  { path = "/usr/local/lib", uri = "file:/usr/local/lib", type = "chroot" },
+  { path = "{{ gramine.libos }}", uri = "file:{{ gramine.libos }}" },
+  { path = "/lib/x86_64-linux-gnu", uri = "file:/lib/x86_64-linux-gnu", type = "chroot" },
+  { path = "/usr/lib/x86_64-linux-gnu", uri = "file:/usr/lib/x86_64-linux-gnu", type = "chroot" },
+  { path = "/lib", uri = "file:/lib", type = "chroot" },
+  { path = "/lib64", uri = "file:/lib64", type = "chroot" },
+  { path = "/usr/lib64", uri = "file:/usr/lib64", type = "chroot" },
+  { path = "/usr/lib/x86_64-linux-gnu/gconv", uri = "file:/usr/lib/x86_64-linux-gnu/gconv", type = "chroot" },
+  { path = "/usr/lib/locale", uri = "file:/usr/lib/locale", type = "chroot" },
+  { path = "/etc", uri = "file:/etc", type = "chroot" },
+  { path = "/usr/share/zoneinfo", uri = "file:/usr/share/zoneinfo", type = "chroot" },
+  { path = "/tmp_gramine", uri = "file:/tmp_gramine", type = "chroot" },
+  # Explicitly mount the donut-cord-model directory as a chroot
+  { path = "/app/donut-cord-model", uri = "file:/app/donut-cord-model", type = "chroot" },
+  { path = "/donut-cord-model", uri = "file:/app/donut-cord-model", type = "chroot" },
+#  { path = "/app/receipt.jpg", uri = "file:/app/receipt.jpg" },
+#  { path = "/app/receipt_output.json", uri = "file:/app/receipt_output.json", type = "chroot" },
+#  { path = "/receipt_output.json", uri = "file:/app/receipt_output.json", type = "chroot" },
+  { uri = "file:/app", path = "/app" },
+  { uri = "file:/app/receipts", path = "/app/receipts" },
+  { uri = "file:/app/outputs", path = "/app/outputs" },
+  { uri = "file:/app/donut-cord-model", path = "/app/donut-cord-model" }
+]
+
+[sgx]
+allowed_files = [
+  "file:/usr/bin/python3",
+  "file:{{ gramine.libos }}",
+  "file:/usr/lib64/ld-linux-x86-64.so.2",
+  "file:/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+  "file:/usr/lib/x86_64-linux-gnu/libc.so.6",
+  "file:/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+  "file:/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+  "file:/usr/lib/x86_64-linux-gnu/libutil.so.1",
+  "file:/usr/lib/x86_64-linux-gnu/libz.so.1",
+  "file:/usr/lib/x86_64-linux-gnu/libm.so.6",
+  "file:/usr/lib/x86_64-linux-gnu/libexpat.so.1",
+  "file:/usr/lib/x86_64-linux-gnu/libffi.so.8",
+  "file:/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+  "file:/usr/lib/x86_64-linux-gnu/libbz2.so.1.0",
+  "file:/usr/lib/x86_64-linux-gnu/liblzma.so.5",
+  "file:/usr/lib/x86_64-linux-gnu/libssl.so.3",
+  "file:/usr/lib/x86_64-linux-gnu/libcrypto.so.3",
+  "file:/usr/lib/x86_64-linux-gnu/libdl.so.2",
+  "file:/usr/lib/x86_64-linux-gnu/librt.so.1",
+  "file:/etc/ssl/openssl.cnf",
+  "file:/usr/lib/ssl/openssl.cnf",
+  "file:/etc/default/locale",
+  "file:/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache",
+  "file:/usr/lib/x86_64-linux-gnu/gconv/gconv-modules",
+  "file:/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.d/gconv-modules-extra.conf",
+  "file:/usr/lib/locale/C.utf8/LC_CTYPE",
+  "file:/etc/localtime",
+  "file:/usr/share/zoneinfo/localtime",
+  "file:/etc/nsswitch.conf",
+  "file:/etc/passwd",
+  "file:/etc/ld.so.cache",
+  "file:/usr/lib/python3.12/",
+  "file:/usr/lib/python3.12/lib-dynload/",
+  "file:/usr/lib/python3.12/encodings/",
+  "file:/usr/lib/python3.12/__pycache__/",
+  "file:/usr/lib/python3.12/collections/",
+  "file:/usr/lib/python3.12/importlib/",
+  "file:/usr/lib/python3.12/json/",
+  "file:/usr/lib/python3.12/re/",
+  "file:/usr/lib/python3.12/tempfile.py",
+  "file:/usr/lib/python3.12/os.py",
+  "file:/usr/lib/python3.12/stat.py",
+  "file:/usr/lib/python3.12/genericpath.py",
+  "file:/usr/lib/python3.12/posixpath.py",
+  "file:/usr/lib/python3.12/abc.py",
+  "file:/usr/lib/python3.12/io.py",
+  "file:/usr/lib/python3.12/sre_parse.py",
+  "file:/usr/lib/python3.12/sre_constants.py",
+  "file:/usr/lib/python3.12/sre_compile.py",
+  "file:/usr/lib/python3/dist-packages/",
+  "file:/usr/local/lib/python3.12/dist-packages/",
+  "file:/app/donut_infer.py",
+  "file:/app/receipt.jpg",
+  "file:/app/donut-cord-model/", # Keep this, it allows the directory itself to be accessed (e.g., for `stat` calls)
+  "file:/app/donut-cord-model/config.json",
+  "file:/app/donut-cord-model/model.bin",
+  "file:/app/donut-cord-model/tokenizer_config.json",
+  "file:/app/donut-cord-model/tokenizer.json",
+  "file:/app/donut-cord-model/special_tokens_map.json",
+  "file:/app/donut-cord-model/vocab.json",
+  "file:/app/donut-cord-model/merges.txt",
+  "file:/tmp_gramine/",
+#  "file:/app/receipt_output.json",
+#  "file:/receipt_output.json",
+  "file:/app/"
+]
