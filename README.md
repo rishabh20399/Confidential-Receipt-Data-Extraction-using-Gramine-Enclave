@@ -7,7 +7,7 @@ Useful link for reference:
 ## 📦 Run
 
 ```bash
-docker pull yourdockerhubusername/donut-gramine
+docker pull ghcr.io/rishabh20399/donut_gramine:latest
 
 sudo docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --entrypoint /bin/bash donut-gramine-final
 OR...
