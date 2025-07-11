@@ -7,10 +7,16 @@ Useful link for reference:
 ## 📦 Run
 
 ```bash
+#FIRST...
 docker pull ghcr.io/rishabh20399/donut_gramine:latest
 
+#THEN...
+#[OPTION 1]
 sudo docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --entrypoint /bin/bash donut-gramine-final
-OR...
+
+# OR...
+
+#[OPTION 2]
 docker run --rm -it \
   --cap-add=SYS_PTRACE \
   --security-opt seccomp=unconfined \
@@ -19,5 +25,5 @@ docker run --rm -it \
   yourdockerhubusername/donut-gramine \
   bash -c "gramine-direct python3 donut_infer.py"
 
-#THEN INSIDE YOUR CONTAINER DO ...
+#FINALLY INSIDE YOUR CONTAINER DO ...
 gramine-direct gramine
